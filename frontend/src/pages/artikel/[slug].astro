@@ -1,0 +1,80 @@
+---
+import { directus } from '../../lib/directus';
+import { readItems } from '@directus/sdk';
+
+const DIRECTUS_URL = 'http://localhost:8055';
+
+export async function getStaticPaths() {
+  const artikel = await directus.request(
+    readItems('Artikel', {
+      fields: ['slug']
+    })
+  );
+
+  return artikel.map((item) => ({
+    params: {
+      slug: item.slug
+    }
+  }));
+}
+
+const { slug } = Astro.params;
+
+const artikel = await directus.request(
+  readItems('Artikel', {
+    filter: {
+      slug: {
+        _eq: slug
+      }
+    },
+    fields: ['id', 'title', 'slug', 'excerpt', 'content', 'featured_image'],
+    limit: 1
+  })
+);
+
+const item = artikel[0];
+
+if (!item) {
+  return Astro.redirect('/artikel');
+}
+---
+
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{item.title}</title>
+  </head>
+  <body>
+    <main>
+      <p>
+        <a href="/artikel">← Zurück zu allen Artikeln</a>
+      </p>
+
+      <article>
+        <h1>{item.title}</h1>
+
+        {item.excerpt && (
+          <div set:html={item.excerpt} />
+        )}
+
+        {item.content && (
+          <div set:html={item.content} />
+        )}
+
+        {item.featured_image && (
+          <img
+            src={`${DIRECTUS_URL}/assets/${item.featured_image}`}
+            alt={item.title}
+            width="500"
+          />
+          <img
+            src={`${DIRECTUS_URL}/assets/${item.featured_image}?width=500`}
+            alt={item.title}
+            width="500"
+          />
+        )}
+
+      </article>
+    </main>
+  </body>
+</html>

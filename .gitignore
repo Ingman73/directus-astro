@@ -44,3 +44,8 @@ docker-compose.override.yml
 tmp/
 temp/
 .cache/
+
+# MacOS Zeug
+__MACOSX/
+.DS_Store
+**/.DS_Store

@@ -1,0 +1,53 @@
+---
+import { directus } from '../../lib/directus';
+import { DIRECTUS_URL } from '../../lib/config';
+import { readItems } from '@directus/sdk';
+
+const pages = await directus.request(
+  readItems('pages', {
+    filter: {
+      slug: {
+        _eq: 'ueber-mich'
+      },
+      status: {
+        _eq: 'published'
+      }
+    },
+    fields: ['id', 'title', 'slug', 'excerpt', 'content', 'featured_image'],
+    limit: 1
+  })
+);
+
+const page = pages[0];
+---
+
+{page ? (
+  <section class="font-white p-vw-8 text content">
+    <div class="about__content">
+      <p class="eyebrow">Über mich</p>
+
+      <h1>{page.title}</h1>
+
+      {page.excerpt && (
+        <div class="about__excerpt" set:html={page.excerpt} />
+      )}
+
+      {page.content && (
+        <div class="about__text" set:html={page.content} />
+      )}
+    </div>
+
+    {page.featured_image && (
+      <div class="about__image">
+        <img
+          src={`${DIRECTUS_URL}/assets/${page.featured_image}?width=700&height=700&fit=cover`}
+          alt={page.title}
+          width="700"
+          height="700"
+        />
+      </div>
+    )}
+  </section>
+) : (
+  <p>Die Seite „ueber-mich“ wurde nicht gefunden.</p>
+)}

@@ -1,0 +1,30 @@
+---
+import { directus } from '../../lib/directus';
+import { readItems } from '@directus/sdk';
+import iggiLogo from '../../../public/images/logo_iggi.svg';
+
+const navigation = await directus.request(
+  readItems('navigation', {
+    filter: {
+      status: {
+        _eq: 'published'
+      }
+    },
+    fields: ['id', 'title', 'url', 'sort'],
+    sort: ['sort']
+  })
+);
+---
+
+<header class="header px-vw-10 pt-2 pb-2 content bg-black-trans-10">
+  <section id="logo" class="right py-2">
+    <a href="/"><img src={iggiLogo.src} alt="SGP Digital Homepage" class="logo" /></a>
+    <nav class="ml-vw-8 pt-3" aria-label="Hauptnavigation">
+      <ul class="row start nogap">
+        {navigation.map((item) => (
+          <li><a href={item.url} class="p-2 py-1">{item.title}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+</header>

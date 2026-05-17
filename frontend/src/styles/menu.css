@@ -9,7 +9,7 @@ header nav { position: fixed; top: 0; left: 0; z-index: 7000; transition: transf
 nav.nav-up { transform: translateY(-100%); }
 nav.nav-down { transform: translateY(0); }
 nav i { margin: 0; }
-nav > ul { position: relative; margin-left: -1rem; border-radius: 5px; }
+nav > ul { position: relative; border-radius: 5px; }
 nav > ul.bg-white-trans { background:rgb(255 255 255 / 75% );}
 nav > ul > li { position: relative; line-height: 1em; }
 nav > ul > li > a, nav > ul > li > a:active, nav > ul > li > a:visited { 

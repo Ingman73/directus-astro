@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url("simple-line-icons.css");
+
 .otgs-development-site-front-end,
 .grecaptcha-badge { display: none !important; }
 

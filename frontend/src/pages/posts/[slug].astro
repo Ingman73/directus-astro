@@ -1,12 +1,17 @@
 ---
+import Layout from '../../layouts/Layout.astro';
 import { directus } from '../../lib/directus';
+import { DIRECTUS_URL } from '../../lib/config';
 import { readItems } from '@directus/sdk';
-
-const DIRECTUS_URL = 'http://localhost:8055';
 
 export async function getStaticPaths() {
   const posts = await directus.request(
     readItems('posts', {
+      filter: {
+        status: {
+          _eq: 'published'
+        }
+      },
       fields: ['slug']
     })
   );
@@ -25,6 +30,9 @@ const posts = await directus.request(
     filter: {
       slug: {
         _eq: slug
+      },
+      status: {
+        _eq: 'published'
       }
     },
     fields: ['id', 'title', 'slug', 'excerpt', 'content', 'featured_image'],
@@ -39,42 +47,26 @@ if (!item) {
 }
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <title>{item.title}</title>
-  </head>
-  <body>
-    <main>
+<Layout title={item.title}>
+  <main>
+    <article class="font-white p-vw-8 text content">
       <p>
-        <a href="/">← Zurück zu allen Artikeln</a>
+        <a href="/posts">← Zurück zu allen Artikeln</a>
       </p>
 
-      <article>
-        <h1>{item.title}</h1>
+      <h1>{item.title}</h1>
 
-        {item.excerpt && (
-          <div set:html={item.excerpt} />
-        )}
+      {item.featured_image && (
+        <img
+          src={`${DIRECTUS_URL}/assets/${item.featured_image}?width=900&height=500&fit=cover`}
+          alt={item.title}
+          width="900"
+          height="500"
+        />
+      )}
 
-        {item.content && (
-          <div set:html={item.content} />
-        )}
-
-        {item.featured_image && (
-          <img
-            src={`${DIRECTUS_URL}/assets/${item.featured_image}`}
-            alt={item.title}
-            width="500"
-          />
-          <img
-            src={`${DIRECTUS_URL}/assets/${item.featured_image}?width=500`}
-            alt={item.title}
-            width="500"
-          />
-        )}
-
-      </article>
-    </main>
-  </body>
-</html>
+      {item.excerpt && <div set:html={item.excerpt} />}
+      {item.content && <div set:html={item.content} />}
+    </article>
+  </main>
+</Layout>

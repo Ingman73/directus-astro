@@ -1,0 +1,29 @@
+---
+import { directus } from '../lib/directus';
+import { readItems } from '@directus/sdk';
+
+const footer_navigation = await directus.request(
+  readItems('footer_navigation', {
+    filter: {
+      status: {
+        _eq: 'published'
+      }
+    },
+    fields: ['id', 'title', 'url', 'sort'],
+    sort: ['sort']
+  })
+);
+---
+
+<footer class="bg-black">
+  <section class="pl-vw-10 pr-vw-5 p-8 row between">
+    <div class="text small col l6 m4 s4 xs4 xxs12">
+      <nav class="main-nav" aria-label="Footernavigation">
+        {footer_navigation.map((item) => (
+          <a href={item.url}>{item.title}</a>
+        ))}
+      </nav>
+    </div>
+    <div class="text small col l6 m4 s4 xs4 xxs12 font-white-trans right">© 2026 SGP GmbH<span class="hide768"> | Supported by AI</span></div>
+  </section>
+</footer>

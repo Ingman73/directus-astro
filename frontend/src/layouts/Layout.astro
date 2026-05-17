@@ -1,0 +1,24 @@
+---
+import '../styles/coolstrap.css';
+import '../styles/spacing.css';
+import '../styles/global.css';
+import '../styles/standards.css';
+import '../styles/menu.css';
+import '../styles/mobile.css';
+
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<Head />
+	</head>
+	<body class="finisher-header">
+		<Header />
+		<slot />
+		<Footer />
+	</body>
+</html>

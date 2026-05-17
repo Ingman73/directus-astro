@@ -1,0 +1,356 @@
+:root{
+  --cols: 12;
+
+  /* Gap Tokens */
+  --gap-s: 24px;
+  --gap-m: 32px;
+  --gap-l: 40px;
+  --gap-xl: 48px;
+  --gap-xxl: 56px;
+
+  /* Gap Large Tokens */
+  --gapl-s: 4vw;
+  --gapl-m: 5vw;
+  --gapl-l: 6vw;
+  --gapl-xl: 7vw;
+  --gapl-xxl: 8vw;
+}
+
+/* ---------- Row (responsive gap) ---------- */
+.row{
+  display:flex;
+  flex-wrap:wrap;
+  flex-flow: row wrap; 
+  --_g: var(--gap-s);
+  gap: var(--_g);
+}
+
+.row.large{
+  --_gl: var(--gapl-s);
+  gap: var(--_gl);
+}
+
+.row.nogap {
+  gap: 0;
+}
+
+/* 1) Vertikales Alignment pro Row */
+.row.top{ align-items:flex-start; }
+.row.mid{ align-items:center; }
+.row.bot{ align-items:flex-end; }
+
+/* 2) Horizontal verteilen */
+.row.start{ justify-content:flex-start; }
+.row.mid{ justify-content:center; }
+.row.end{ justify-content:flex-end; }
+.row.between{ justify-content:space-between; }
+
+/* 3) Schnelles "Gutter aus" auf kleinen Screens, ab l wieder normal */
+@media (max-width:767.98px){
+  .row.gap-mobile-0{ --g: 0px; }
+  .row.large.gap-mobile-0{ --gl: 0px; }
+}
+
+/* xs >= 551px (bleibt 16px) */
+@media (min-width:551px){
+  .row{ --_g: var(--gap-s); }
+  .row.large{ --_gl: var(--gapl-s); }
+}
+
+/* s >= 769px */
+@media (min-width:769px){
+  .row{ --_g: var(--gap-m); }
+  .row.large{ --_gl: var(--gapl-m); }
+}
+
+/* m >= 1025px (bleibt 24px) */
+@media (min-width:1025px){
+  .row{ --_g: var(--gap-m); }
+  .row.large{ --_gl: var(--gapl-m); }
+}
+
+/* l >= 1201px */
+@media (min-width:1201px){
+  .row{ --_g: var(--gap-l); }
+  .row.large{ --_gl: var(--gapl-l); }
+}
+
+/* xl >= 1501px */
+@media (min-width:1501px){
+  .row{ --_g: var(--gap-xl); }
+  .row.large{ --_gl: var(--gapl-xl); }
+}
+
+/* xxl >= 2001px */
+@media (min-width:2001px){
+  .row{ --_g: var(--gap-xxl); }
+  .row.large{ --_gl: var(--gapl-xxl); }
+}
+
+/* ---------- Column Core ---------- */
+.col{
+  box-sizing:border-box;
+  flex: 0 0 auto;
+  min-width:0;
+
+  /* Inputs (setzen Utilities) */
+  --span-xxs: 12;
+  --offset-xxs: 0;
+  --order-xxs: 0;
+
+  /* Computed defaults */
+  --_span: var(--span-xxs);
+  --_offset: var(--offset-xxs);
+  --_order: var(--order-xxs);
+
+  order: var(--_order);
+
+  width: calc(
+    (100% - (var(--cols) - 1) * var(--_g)) * (var(--_span) / var(--cols))
+    + (var(--_span) - 1) * var(--_g)
+  );
+  
+  margin-left: calc(
+    (100% - (var(--cols) - 1) * var(--_g)) * (var(--_offset) / var(--cols))
+    + var(--_offset) * var(--_g)
+  );
+
+}
+
+.large .col{
+
+  width: calc(
+    (100% - (var(--cols) - 1) * var(--_gl)) * (var(--_span) / var(--cols))
+    + (var(--_span) - 1) * var(--_gl)
+  );
+  
+  margin-left: calc(
+    (100% - (var(--cols) - 1) * var(--_gl)) * (var(--_offset) / var(--cols))
+    + var(--_offset) * var(--_gl)
+  );
+
+}
+
+.nogap > .col{
+
+  width: calc(
+    var(--_span) / var(--cols) * 100%
+  );
+
+  margin-left: calc(
+    var(--_offset) / var(--cols) * 100%
+  );
+  
+}
+
+/* Helpers */
+.row.nowrap{ flex-wrap: nowrap; }
+.col-auto{ flex: 1 1 0; width:auto; margin-left:0; }
+.col-fit{ width: fit-content; }
+
+/* ---------- Breakpoint Hierarchie (nimmt immer den zuletzt gesetzten kleineren Wert) ---------- */
+
+/* xs >= 551 */
+@media (min-width:551px){
+  .col{
+    --_span: var(--span-xs, var(--span-xxs));
+    --_offset: var(--offset-xs, var(--offset-xxs));
+    --_order: var(--order-xs, var(--order-xxs));
+  }
+}
+
+/* s >= 769 */
+@media (min-width:769px){
+  .col{
+    --_span: var(--span-s, var(--span-xs, var(--span-xxs)));
+    --_offset: var(--offset-s, var(--offset-xs, var(--offset-xxs)));
+    --_order: var(--order-s, var(--order-xs, var(--order-xxs)));
+  }
+}
+
+/* m >= 1025 */
+@media (min-width:1025px){
+  .col{
+    --_span: var(--span-m, var(--span-s, var(--span-xs, var(--span-xxs))));
+    --_offset: var(--offset-m, var(--offset-s, var(--offset-xs, var(--offset-xxs))));
+    --_order: var(--order-m, var(--order-s, var(--order-xs, var(--order-xxs))));
+  }
+}
+
+/* l >= 1201 */
+@media (min-width:1201px){
+  .col{
+    --_span: var(--span-l, var(--span-m, var(--span-s, var(--span-xs, var(--span-xxs)))));
+    --_offset: var(--offset-l, var(--offset-m, var(--offset-s, var(--offset-xs, var(--offset-xxs)))));
+    --_order: var(--order-l, var(--order-m, var(--order-s, var(--order-xs, var(--order-xxs)))));
+  }
+}
+
+/* xl >= 1501 */
+@media (min-width:1501px){
+  .col{
+    --_span: var(--span-xl, var(--span-l, var(--span-m, var(--span-s, var(--span-xs, var(--span-xxs))))));
+    --_offset: var(--offset-xl, var(--offset-l, var(--offset-m, var(--offset-s, var(--offset-xs, var(--offset-xxs))))));
+    --_order: var(--order-xl, var(--order-l, var(--order-m, var(--order-s, var(--order-xs, var(--order-xxs))))));
+  }
+}
+
+
+/* xxl >= 2001 */
+@media (min-width:2001px){
+  .col{
+    --_span: var(--span-xxl, var(--span-xl, var(--span-l, var(--span-m, var(--span-s, var(--span-xs, var(--span-xxs)))))));
+    --_offset: var(--offset-xxl, var(--offset-xl, var(--offset-l, var(--offset-m, var(--offset-s, var(--offset-xs, var(--offset-xxs)))))));
+    --_order: var(--order-xxl, var(--order-xl, var(--order-l, var(--order-m, var(--order-s, var(--order-xs, var(--order-xxs)))))));
+  }
+}
+
+/* =========================================================
+   SPAN UTILITIES (xxs/xs/s/m/l/xl jeweils 1..12)
+   Nutzung: <div class="col m4 xl3">...</div>
+   ========================================================= */
+
+/* xxs (default) */
+.xxs1{--span-xxs:1;} .xxs2{--span-xxs:2;} .xxs3{--span-xxs:3;} .xxs4{--span-xxs:4;}
+.xxs5{--span-xxs:5;} .xxs6{--span-xxs:6;} .xxs7{--span-xxs:7;} .xxs8{--span-xxs:8;}
+.xxs9{--span-xxs:9;} .xxs10{--span-xxs:10;} .xxs11{--span-xxs:11;} .xxs12{--span-xxs:12;}
+
+/* xs */
+.xs1{--span-xs:1;} .xs2{--span-xs:2;} .xs3{--span-xs:3;} .xs4{--span-xs:4;}
+.xs5{--span-xs:5;} .xs6{--span-xs:6;} .xs7{--span-xs:7;} .xs8{--span-xs:8;}
+.xs9{--span-xs:9;} .xs10{--span-xs:10;} .xs11{--span-xs:11;} .xs12{--span-xs:12;}
+
+/* s */
+.s1{--span-s:1;} .s2{--span-s:2;} .s3{--span-s:3;} .s4{--span-s:4;}
+.s5{--span-s:5;} .s6{--span-s:6;} .s7{--span-s:7;} .s8{--span-s:8;}
+.s9{--span-s:9;} .s10{--span-s:10;} .s11{--span-s:11;} .s12{--span-s:12;}
+
+/* m */
+.m1{--span-m:1;} .m2{--span-m:2;} .m3{--span-m:3;} .m4{--span-m:4;}
+.m5{--span-m:5;} .m6{--span-m:6;} .m7{--span-m:7;} .m8{--span-m:8;}
+.m9{--span-m:9;} .m10{--span-m:10;} .m11{--span-m:11;} .m12{--span-m:12;}
+
+/* l */
+.l1{--span-l:1;} .l2{--span-l:2;} .l3{--span-l:3;} .l4{--span-l:4;}
+.l5{--span-l:5;} .l6{--span-l:6;} .l7{--span-l:7;} .l8{--span-l:8;}
+.l9{--span-l:9;} .l10{--span-l:10;} .l11{--span-l:11;} .l12{--span-l:12;}
+
+/* xl */
+.xl1{--span-xl:1;} .xl2{--span-xl:2;} .xl3{--span-xl:3;} .xl4{--span-xl:4;}
+.xl5{--span-xl:5;} .xl6{--span-xl:6;} .xl7{--span-xl:7;} .xl8{--span-xl:8;}
+.xl9{--span-xl:9;} .xl10{--span-xl:10;} .xl11{--span-xl:11;} .xl12{--span-xl:12;}
+
+/* xxl */
+.xxl1{--span-xxl:1;} .xxl2{--span-xxl:2;} .xxl3{--span-xxl:3;} .xxl4{--span-xxl:4;}
+.xxl5{--span-xxl:5;} .xxl6{--span-xxl:6;} .xxl7{--span-xxl:7;} .xxl8{--span-xxl:8;}
+.xxl9{--span-xxl:9;} .xxl10{--span-xxl:10;} .xxl11{--span-xxl:11;} .xxl12{--span-xxl:12;}
+
+
+/* =========================================================
+   OFFSET UTILITIES (0..11)
+   Nutzung: <div class="col m6 off-m3">...</div>
+   ========================================================= */
+
+/* xxs */
+.off-xxs0{--offset-xxs:0;}
+.off-xxs1{--offset-xxs:1;} .off-xxs2{--offset-xxs:2;} .off-xxs3{--offset-xxs:3;}
+.off-xxs4{--offset-xxs:4;} .off-xxs5{--offset-xxs:5;} .off-xxs6{--offset-xxs:6;}
+.off-xxs7{--offset-xxs:7;} .off-xxs8{--offset-xxs:8;} .off-xxs9{--offset-xxs:9;}
+.off-xxs10{--offset-xxs:10;} .off-xxs11{--offset-xxs:11;}
+
+/* xs */
+.off-xs0{--offset-xs:0;}
+.off-xs1{--offset-xs:1;} .off-xs2{--offset-xs:2;} .off-xs3{--offset-xs:3;}
+.off-xs4{--offset-xs:4;} .off-xs5{--offset-xs:5;} .off-xs6{--offset-xs:6;}
+.off-xs7{--offset-xs:7;} .off-xs8{--offset-xs:8;} .off-xs9{--offset-xs:9;}
+.off-xs10{--offset-xs:10;} .off-xs11{--offset-xs:11;}
+
+/* s */
+.off-s0{--offset-s:0;}
+.off-s1{--offset-s:1;} .off-s2{--offset-s:2;} .off-s3{--offset-s:3;}
+.off-s4{--offset-s:4;} .off-s5{--offset-s:5;} .off-s6{--offset-s:6;}
+.off-s7{--offset-s:7;} .off-s8{--offset-s:8;} .off-s9{--offset-s:9;}
+.off-s10{--offset-s:10;} .off-s11{--offset-s:11;}
+
+/* m */
+.off-m0{--offset-m:0;}
+.off-m1{--offset-m:1;} .off-m2{--offset-m:2;} .off-m3{--offset-m:3;}
+.off-m4{--offset-m:4;} .off-m5{--offset-m:5;} .off-m6{--offset-m:6;}
+.off-m7{--offset-m:7;} .off-m8{--offset-m:8;} .off-m9{--offset-m:9;}
+.off-m10{--offset-m:10;} .off-m11{--offset-m:11;}
+
+/* l */
+.off-l0{--offset-l:0;}
+.off-l1{--offset-l:1;} .off-l2{--offset-l:2;} .off-l3{--offset-l:3;}
+.off-l4{--offset-l:4;} .off-l5{--offset-l:5;} .off-l6{--offset-l:6;}
+.off-l7{--offset-l:7;} .off-l8{--offset-l:8;} .off-l9{--offset-l:9;}
+.off-l10{--offset-l:10;} .off-l11{--offset-l:11;}
+
+/* xl */
+.off-xl0{--offset-xl:0;}
+.off-xl1{--offset-xl:1;} .off-xl2{--offset-xl:2;} .off-xl3{--offset-xl:3;}
+.off-xl4{--offset-xl:4;} .off-xl5{--offset-xl:5;} .off-xl6{--offset-xl:6;}
+.off-xl7{--offset-xl:7;} .off-xl8{--offset-xl:8;} .off-xl9{--offset-xl:9;}
+.off-xl10{--offset-xl:10;} .off-xl11{--offset-xl:11;}
+
+/* xxl */
+.off-xxl0{--offset-xxl:0;}
+.off-xxl1{--offset-xxl:1;} .off-xxl2{--offset-xxl:2;} .off-xxl3{--offset-xxl:3;}
+.off-xxl4{--offset-xxl:4;} .off-xxl5{--offset-xxl:5;} .off-xxl6{--offset-xxl:6;}
+.off-xxl7{--offset-xxl:7;} .off-xxl8{--offset-xxl:8;} .off-xxl9{--offset-xxl:9;}
+.off-xxl10{--offset-xxl:10;} .off-xxl11{--offset-xxl:11;}
+
+
+/* =========================================================
+   ORDER UTILITIES (0..12)
+   Nutzung: <div class="col ord-xxs-2 ord-l-1">...</div>
+   ========================================================= */
+
+/* xxs */
+.ord-xxs-0{--order-xxs:0;}
+.ord-xxs-1{--order-xxs:1;} .ord-xxs-2{--order-xxs:2;} .ord-xxs-3{--order-xxs:3;}
+.ord-xxs-4{--order-xxs:4;} .ord-xxs-5{--order-xxs:5;} .ord-xxs-6{--order-xxs:6;}
+.ord-xxs-7{--order-xxs:7;} .ord-xxs-8{--order-xxs:8;} .ord-xxs-9{--order-xxs:9;}
+.ord-xxs-10{--order-xxs:10;} .ord-xxs-11{--order-xxs:11;} .ord-xxs-12{--order-xxs:12;}
+
+/* xs */
+.ord-xs-0{--order-xs:0;}
+.ord-xs-1{--order-xs:1;} .ord-xs-2{--order-xs:2;} .ord-xs-3{--order-xs:3;}
+.ord-xs-4{--order-xs:4;} .ord-xs-5{--order-xs:5;} .ord-xs-6{--order-xs:6;}
+.ord-xs-7{--order-xs:7;} .ord-xs-8{--order-xs:8;} .ord-xs-9{--order-xs:9;}
+.ord-xs-10{--order-xs:10;} .ord-xs-11{--order-xs:11;} .ord-xs-12{--order-xs:12;}
+
+/* s */
+.ord-s-0{--order-s:0;}
+.ord-s-1{--order-s:1;} .ord-s-2{--order-s:2;} .ord-s-3{--order-s:3;}
+.ord-s-4{--order-s:4;} .ord-s-5{--order-s:5;} .ord-s-6{--order-s:6;}
+.ord-s-7{--order-s:7;} .ord-s-8{--order-s:8;} .ord-s-9{--order-s:9;}
+.ord-s-10{--order-s:10;} .ord-s-11{--order-s:11;} .ord-s-12{--order-s:12;}
+
+/* m */
+.ord-m-0{--order-m:0;}
+.ord-m-1{--order-m:1;} .ord-m-2{--order-m:2;} .ord-m-3{--order-m:3;}
+.ord-m-4{--order-m:4;} .ord-m-5{--order-m:5;} .ord-m-6{--order-m:6;}
+.ord-m-7{--order-m:7;} .ord-m-8{--order-m:8;} .ord-m-9{--order-m:9;}
+.ord-m-10{--order-m:10;} .ord-m-11{--order-m:11;} .ord-m-12{--order-m:12;}
+
+/* l */
+.ord-l-0{--order-l:0;}
+.ord-l-1{--order-l:1;} .ord-l-2{--order-l:2;} .ord-l-3{--order-l:3;}
+.ord-l-4{--order-l:4;} .ord-l-5{--order-l:5;} .ord-l-6{--order-l:6;}
+.ord-l-7{--order-l:7;} .ord-l-8{--order-l:8;} .ord-l-9{--order-l:9;}
+.ord-l-10{--order-l:10;} .ord-l-11{--order-l:11;} .ord-l-12{--order-l:12;}
+
+/* xl */
+.ord-xl-0{--order-xl:0;}
+.ord-xl-1{--order-xl:1;} .ord-xl-2{--order-xl:2;} .ord-xl-3{--order-xl:3;}
+.ord-xl-4{--order-xl:4;} .ord-xl-5{--order-xl:5;} .ord-xl-6{--order-xl:6;}
+.ord-xl-7{--order-xl:7;} .ord-xl-8{--order-xl:8;} .ord-xl-9{--order-xl:9;}
+.ord-xl-10{--order-xl:10;} .ord-xl-11{--order-xl:11;} .ord-xl-12{--order-xl:12;}
+
+/* xxl */
+.ord-xxl-0{--order-xxl:0;}
+.ord-xxl-1{--order-xxl:1;} .ord-xxl-2{--order-xxl:2;} .ord-xxl-3{--order-xxl:3;}
+.ord-xxl-4{--order-xxl:4;} .ord-xxl-5{--order-xxl:5;} .ord-xxl-6{--order-xxl:6;}
+.ord-xxl-7{--order-xxl:7;} .ord-xxl-8{--order-xxl:8;} .ord-xxl-9{--order-xxl:9;}
+.ord-xxl-10{--order-xxl:10;} .ord-xxl-11{--order-xxl:11;} .ord-xxl-12{--order-xxl:12;}

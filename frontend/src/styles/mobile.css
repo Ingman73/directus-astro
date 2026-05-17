@@ -1,0 +1,202 @@
+@charset "UTF-8";
+
+/* 
+
+  Diese CSS-Datei definiert das mobile Styling der Seite
+
+*/
+
+/* -----  Min. 1600  --------------------------------------------------- */
+
+@media all and ( min-width: 1600px ) {
+  .hide1500 { display: none; visibility: hidden; }
+  .show1500 { display: block; visibility: visible; }
+
+  #indexnews .swiper .swiper-slide { filter: grayscale(50%) brightness(0.5); transition: filter 0.3s ease, transform 0.3s ease; }
+  #indexnews .swiper .swiper-slide.swiper-slide-next { filter: grayscale(0%) brightness(1); }
+}
+
+/* -----  Min. 2000  --------------------------------------------------- */
+
+@media all and ( min-width: 2000px ) {
+  .hide2000 { display: none; visibility: hidden; }
+  .show2000 { display: block; visibility: visible; }
+
+  .text { font-size: 1.2rem; }
+}
+
+/* -----  Min. 2400  --------------------------------------------------- */
+
+@media all and ( min-width: 2400px ) {
+  .hide2000 { display: none; visibility: hidden; }
+  .show2000 { display: block; visibility: visible; }
+
+  .text { font-size: 1.3rem; }
+  #projects .portfolio-grid { column-count: 3; }
+}
+
+/* -----  Max. 1440  --------------------------------------------------- */
+
+@media all and (max-width: 1440px) {
+  .hide1500 { display: none; visibility: hidden; }
+  .show1500 { display: block; visibility: visible; }
+
+  #indexprojects div.box_l div.box_l_content { margin: 0 5% 0 auto; width: 55%; }
+  #indexprojects div.box_l div.parallax-box { width: 50%; top: 15%; left: 10%; }
+  #indexprojects div.box_r div.box_r_content { margin: 0 auto 0 5%; width: 55%; }
+  #indexprojects div.box_r div.parallax-box { width: 50%; top: 20%; right: 10%; }
+   #team .row .l4 .l12 .zoom { margin: 8px 0 0 0; }
+}
+
+/* -----  Max. 1200  --------------------------------------------------- */
+
+@media all and (max-width: 1200px) {
+  .hide1200 { display: none; visibility: hidden; }
+  .show1200 { display: block; visibility: visible; }
+
+  header#start #slider .swiper-head .swiper-slide.h1 { font-size: 10vw; }
+  #indexprojects div.box_l div.box_l_content { margin: 0 5% 0 auto; width: 55%; }
+  #indexprojects div.box_l div.parallax-box { width: 65%; top: 15%; left: 10%; }
+  #indexprojects div.box_r div.box_r_content { margin: 0 auto 0 5%; width: 55%; }
+  #indexprojects div.box_r div.parallax-box { width: 65%; top: 20%; right: 10%; }
+  #indexprojects div.js-parallax img { filter: grayscale(0%) brightness(1) blur(0); transform: scale(1.04) !important; }
+   #team .row .l4 .l12 .zoom { margin: 0 0 0 8px; }
+}
+
+/* -----  Max. 1024  --------------------------------------------------- */
+
+@media all and (max-width: 1024px) {
+  .hide1024 { display: none; visibility: hidden; }
+  .show1024 { display: block; visibility: visible; }
+
+  :root {
+    --h-size: 6vw;
+    --h-lineheight: 1.25em;
+    --h-marbot: 0.9em;
+  }
+
+  .content h1 { font-size: calc(var(--h-size) * 0.85); }
+  .content h2 { font-size: calc(var(--h-size) * 0.5); }
+  .content h3 { font-size: calc(var(--h-size) * 0.4); }
+  .content h4 { font-size: calc(var(--h-size) * 0.35); }
+  .content h5 { font-size: calc(var(--h-size) * 0.35); }
+  .content h6 { font-size: calc(var(--h-size) * 0.35); }
+
+  h1 { font-size: calc(var(--h-size) * 0.85); }
+  h2 { font-size: calc(var(--h-size) * 0.7); }
+  h3 { font-size: calc(var(--h-size) * 0.45); }
+  h4 { font-size: calc(var(--h-size) * 0.45); }
+  h5 { font-size: calc(var(--h-size) * 0.45); }
+  h6 { font-size: calc(var(--h-size) * 0.45); }
+
+  #indexprojects a h2 { font-size: 1.5rem; }
+  #indexprojects div.box_l { margin: 0 auto 10vw 0; }
+  #indexprojects div.box_r { margin: 0 0 10vw auto; }
+  .tw-photo { width: 15vw; height: 15vw; }
+  .tw-text { font-size: 3.5vw; line-height: 1.3em; margin: 0; }
+  .tw-bigquote svg { margin: 0 0 2rem 0; width: 6vw; height: auto; }
+  #services .mt-10 { margin-top: var(--sp-6); }
+  #services .fadein-group .p-vw-2 { padding: 3vw; }
+  #services .col.l4 svg#serviceicon { width: 6vw; height: 6vw; margin-bottom: 2vw; }
+  #services .service-svg { padding: 18px; }
+  #blog .fadein-group .p-vw-2 { padding: 3vw; }
+  #team .fadein-group .px-4 { padding: 3vw; }
+}
+
+@media all and (orientation: landscape) and (max-width: 1024px) {
+}
+  
+@media all and (orientation: portrait) and (max-width: 1024px) {
+}
+  
+/* -----  Max. 768  ---------------------------------------------------- */
+  
+@media all and ( max-width: 768px ) {
+  .hide768 { display: none; visibility: hidden; }
+  .show768 { display: block; visibility: visible; }
+
+  :root {
+    --h-size: 4rem;
+    --h-lineheight: 1.3em;
+    --h-marbot: 0.9em;
+  }
+
+  h1 { font-size: calc(var(--h-size) * 0.6); }
+  .content h1 { font-size: calc(var(--h-size) * 0.53); }
+  div.h1 { font-size: calc(var(--h-size) * 0.53); }
+
+  h2 { font-size: calc(var(--h-size) * 0.5); }
+  .content h2 { font-size: calc(var(--h-size) * 0.44); }
+  .content .text-reveal { font-size: calc(var(--h-size) * 0.65); }
+  div.h2 { font-size: calc(var(--h-size) * 0.44); }
+  div.headcolumn { display: none; }
+  div.contentcolumn { width: 100%; padding: 5vw !important; }
+  header#start { height: 100vh; width: 100%; padding: 0 30px; }
+  #indexprojects .contentcolumn { padding: 0 5vw !important; }
+  #indexprojects div.box_l div.box_l_content { margin: 0 0 0 auto; width: 60%; }
+  #indexprojects div.box_l div.parallax-box { width: 65%; top: 15%; left: 5vw; }
+  #indexprojects div.box_r div.box_r_content { margin: 0 auto 0 0; width: 60%; }
+  #indexprojects div.box_r div.parallax-box { width: 65%; top: 20%; right: 5vw; }
+  #projects .portfolio-grid { column-count: 1; }
+  #project .portfolio-grid { display: block; }
+  #projects .portfolio-grid .portfolio-item.p-vw-3 { padding: 5vw; }
+  #services .fadein-group .p-vw-2 { padding: 5vw; }
+  #services .col.l4 svg#serviceicon { width: 8vw; height: 8vw; margin-bottom: 2vw; }
+  #services .text a h2 { min-height: auto; }
+  #services .service-svg { padding: 18px; width: 90px; height: 90px; }
+  #blog .fadein-group .p-vw-2 { padding: 5vw; }
+  #team .fadein-group .px-4 { padding: 5vw; }
+  footer section { padding: 8vw 5vw !important; }
+}
+  
+@media all and (orientation: landscape) and (max-width: 768px) {
+}
+  
+@media all and (orientation: portrait) and (max-width: 768px) {
+}
+  
+/* -----  Max. 600  ---------------------------------------------------- */
+  
+@media all and (max-width: 550px) {
+  .hide550 { display: none; visibility: hidden; }
+  .show550 { display: block; visibility: visible; }
+
+  .content .text-reveal { font-size: calc(var(--h-size) * 0.45); }
+  .text { font-size: 1rem; line-height: 1.55em; }
+  .text p { margin-bottom: 1.55rem; }
+  header#start { height: 100vh; width: 100%; padding: 0; }
+  header #logo { padding: 10px calc(5vw - 10px) 0 0 !important; }
+  header #logo a img.logo { max-height: 130px; min-height: auto; margin: 0; padding: 10px; }
+  header#start #slider .swiper-head .swiper-slide.h1 { padding: 0 5vw; font-size: 12vw; }
+  header#start #slider .h1 { padding: 0 5vw 10px; font-size: 1.5rem; }
+  header#start a.about { left: 5vw; bottom: 10vw; }
+  header#start a.contact { right: 5vw; bottom: 10vw; }
+  #indexprojects a h2 { font-size: 1.3rem; }
+  #indexprojects div.box_l,
+  #indexprojects div.box_r { margin: 0 0 5vw 0; background: var(--black-trans-50); border-radius: 10px; }
+  #indexprojects div.box_l div.box_l_content,
+  #indexprojects div.box_r div.box_r_content { margin: 0; padding: 5vw 5vw 0; width: 100%; }
+  #indexprojects div.box_l div.parallax-box,
+  #indexprojects div.box_r div.parallax-box { position: relative; width: 100%; top: 0; left: 0; right: 0; padding: 0 5vw 5vw; background: none; }
+  .tw-photo { width: 20vw; height: 20vw; }
+  .tw-text { font-size: 5.5vw; line-height: 1.3em; margin: 0; }
+  .tw-bigquote svg { margin: 0 0 2rem 0; width: 8vw; height: auto; }
+  .tw-dots { display: none; }
+  #services .col.l4 svg#serviceicon { width: 60px; height: 60px; margin-bottom: 3vw; }
+  #team .row .l4 .l12 .zoom { margin: 8px 0 0 0; }
+  footer section { padding: 5vw !important; justify-content: flex-start !important; gap: 0 !important; }
+  footer section .right { text-align: left; }
+}
+
+@media all and (orientation: landscape) and (max-width: 550px) {
+}
+
+@media all and (orientation: portrait) and (max-width: 550px) {
+}
+
+/* -----  Max. 400  ---------------------------------------------------- */
+  
+@media all and (max-width: 450px) {
+  .hide450 { display: none; visibility: hidden; }
+  .show450 { display: block; visibility: visible; }
+}
